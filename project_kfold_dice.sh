@@ -1,0 +1,5 @@
+CUDA_AVAILABLE_DEVICES=0 python dice_coefficient_from_kfold.py --model_path models/unet_final_project_vanilla_logits/unet_final_project_vanilla_logits_0_99.pth --kfold 0
+CUDA_AVAILABLE_DEVICES=0 python dice_coefficient_from_kfold.py --model_path models/unet_final_project_vanilla_logits/unet_final_project_vanilla_logits_1_99.pth --kfold 1
+CUDA_AVAILABLE_DEVICES=0 python dice_coefficient_from_kfold.py --model_path models/unet_final_project_vanilla_logits/unet_final_project_vanilla_logits_2_99.pth --kfold 2
+CUDA_AVAILABLE_DEVICES=0 python dice_coefficient_from_kfold.py --model_path models/unet_final_project_vanilla_logits/unet_final_project_vanilla_logits_3_99.pth --kfold 3
+CUDA_AVAILABLE_DEVICES=0 python dice_coefficient_from_kfold.py --model_path models/unet_final_project_vanilla_logits/unet_final_project_vanilla_logits_4_99.pth --kfold 4
