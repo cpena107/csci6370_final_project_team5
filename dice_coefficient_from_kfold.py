@@ -5,7 +5,6 @@ from dataset_final_project import Project_dataset as Project
 from tqdm import tqdm
 import numpy as np
 from torchvision import transforms
-from dataset_final_project import RandomGenerator
 import argparse
 from scipy.spatial.distance import directed_hausdorff
 import os
@@ -14,7 +13,7 @@ import cv2
 
 def save_visualization(original_img, true_mask, pred_mask, output_path):
     """
-    Save only the prediction mask
+    Save prediction mask
     
     Args:
         original_img (numpy.ndarray): Original input image (not used)
@@ -27,6 +26,36 @@ def save_visualization(original_img, true_mask, pred_mask, output_path):
     
     # Save the prediction mask
     cv2.imwrite(output_path, pred_mask)
+
+def save_kfold_data(original_img, true_mask, pred_mask, slice_name, output_dir):
+    """
+    Save original image, ground truth mask, and prediction mask
+    
+    Args:
+        original_img (numpy.ndarray): Original input image
+        true_mask (numpy.ndarray): Ground truth mask
+        pred_mask (numpy.ndarray): Predicted mask
+        slice_name (str): Name of the slice
+        output_dir (str): Directory to save the files
+    """
+    # Create subdirectories for each type
+    img_dir = os.path.join(output_dir, 'images')
+    gt_dir = os.path.join(output_dir, 'ground_truth')
+    pred_dir = os.path.join(output_dir, 'predictions')
+    
+    os.makedirs(img_dir, exist_ok=True)
+    os.makedirs(gt_dir, exist_ok=True)
+    os.makedirs(pred_dir, exist_ok=True)
+    
+    # Convert to uint8 and scale to 0-255
+    img = ((original_img - original_img.min()) / (original_img.max() - original_img.min() + 1e-7) * 255).astype(np.uint8)
+    gt_mask = (true_mask * 255).astype(np.uint8)
+    pred_mask = (pred_mask * 255).astype(np.uint8)
+    
+    # Save files
+    cv2.imwrite(os.path.join(img_dir, f"{slice_name}.png"), img)
+    cv2.imwrite(os.path.join(gt_dir, f"{slice_name}.png"), gt_mask)
+    cv2.imwrite(os.path.join(pred_dir, f"{slice_name}.png"), pred_mask)
 
 def calculate_hausdorff_distance(pred_mask, true_mask):
     """
@@ -84,11 +113,12 @@ def evaluate_model(model_path, kfold, device="cuda"):
     # Create output directory for predictions
     model_name = Path(model_path).stem
     output_dir = os.path.join("predictions", model_name)
+    kfold_data_dir = os.path.join("kfold_data", f"fold_{kfold}")
     os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(kfold_data_dir, exist_ok=True)
 
     # Load validation dataset
-    val_dataset = Project(image_dir=IMAGE_PATH, label_dir=LABEL_PATH, list_dir=VAL_PATH, transform=transforms.Compose(
-                                   [RandomGenerator(output_size=[512, 512])]))
+    val_dataset = Project(image_dir=IMAGE_PATH, label_dir=LABEL_PATH, list_dir=VAL_PATH, transform=None)
     val_dataloader = DataLoader(dataset=val_dataset, batch_size=BATCH_SIZE)
 
     # Initialize and load model
@@ -145,6 +175,9 @@ def evaluate_model(model_path, kfold, device="cuda"):
             slice_name = img_mask['case_name'][0]  # Get original slice name
             output_path = os.path.join(output_dir, f"{slice_name}.png")
             save_visualization(img_np[0, 0], mask_np[0], pred_np[0], output_path)
+            
+            # Save kfold data
+            save_kfold_data(img_np[0, 0], mask_np[0], pred_np[0], slice_name, kfold_data_dir)
 
     avg_dice = np.mean(dice_scores)
     avg_hausdorff = np.mean(hausdorff_distances)
