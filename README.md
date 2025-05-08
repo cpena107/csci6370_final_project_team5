@@ -7,13 +7,10 @@
 This project implements medical image segmentation using deep learning models. It includes implementations of UNet and TransUNet architectures for semantic segmentation tasks.
 
 ## Requirements
-- Python 3.x
-- PyTorch
-- torchvision
-- numpy
-- scipy
-- ml_collections
-- opencv
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Available Models
 
