@@ -6,26 +6,10 @@ from tqdm import tqdm
 import numpy as np
 from torchvision import transforms
 import argparse
-from scipy.spatial.distance import directed_hausdorff
+from medpy import metric
 import os
 from pathlib import Path
 import cv2
-
-def save_visualization(original_img, true_mask, pred_mask, output_path):
-    """
-    Save prediction mask
-    
-    Args:
-        original_img (numpy.ndarray): Original input image (not used)
-        true_mask (numpy.ndarray): Ground truth mask (not used)
-        pred_mask (numpy.ndarray): Predicted mask
-        output_path (str): Path to save the visualization
-    """
-    # Convert prediction mask to uint8
-    pred_mask = pred_mask.astype(np.uint8) * 255
-    
-    # Save the prediction mask
-    cv2.imwrite(output_path, pred_mask)
 
 def save_kfold_data(original_img, true_mask, pred_mask, slice_name, output_dir):
     """
@@ -56,40 +40,6 @@ def save_kfold_data(original_img, true_mask, pred_mask, slice_name, output_dir):
     cv2.imwrite(os.path.join(img_dir, f"{slice_name}.png"), img)
     cv2.imwrite(os.path.join(gt_dir, f"{slice_name}.png"), gt_mask)
     cv2.imwrite(os.path.join(pred_dir, f"{slice_name}.png"), pred_mask)
-
-def calculate_hausdorff_distance(pred_mask, true_mask):
-    """
-    Calculate the Hausdorff Distance between predicted and ground truth masks
-    
-    Args:
-        pred_mask (numpy.ndarray): Binary predicted mask
-        true_mask (numpy.ndarray): Binary ground truth mask
-    
-    Returns:
-        float: Hausdorff Distance
-    """
-    # Convert to binary masks
-    pred_mask = pred_mask.astype(bool)
-    true_mask = true_mask.astype(bool)
-    
-    # Get boundary points
-    pred_boundary = np.argwhere(pred_mask)
-    true_boundary = np.argwhere(true_mask)
-    
-    # Check if either mask is empty
-    if len(pred_boundary) == 0 or len(true_boundary) == 0:
-        # If both masks are empty, return 0 (perfect match)
-        if len(pred_boundary) == 0 and len(true_boundary) == 0:
-            return 0.0
-        # If only one mask is empty, return a large but finite value
-        return 1000.0
-    
-    # Calculate directed Hausdorff distances
-    d1 = directed_hausdorff(pred_boundary, true_boundary)[0]
-    d2 = directed_hausdorff(true_boundary, pred_boundary)[0]
-    
-    # Return the maximum of the two directed distances
-    return max(d1, d2)
 
 def evaluate_model(model_path, kfold, device="cuda"):
     """
@@ -137,9 +87,6 @@ def evaluate_model(model_path, kfold, device="cuda"):
             img = img_mask['image'].float().to(device)
             mask = img_mask['label'].to(device)
 
-            # print(f"img: {img.shape}, {img.min()}, {img.max()}")
-            # print(f"mask: {mask.shape}, {mask.min()}, {mask.max()}")
-            
             # Model prediction
             outputs = model(img)
 
@@ -167,14 +114,23 @@ def evaluate_model(model_path, kfold, device="cuda"):
                 print(f"Empty mask detected in image {idx}:")
                 print(f"Prediction sum: {torch.sum(predictions).item()}")
                 print(f"Ground truth sum: {torch.sum(mask).item()}")
+                # If either mask is empty, use the image diagonal as the Hausdorff distance
+                # This represents the maximum possible distance between any two points in the image
+                height, width = pred_np[0].shape
+                hausdorff = np.sqrt(height**2 + width**2)
+            else:
+                try:
+                    hausdorff = metric.binary.hd95(pred_np[0], mask_np[0])
+                except Exception as e:
+                    print(f"Error calculating HD95 for image {idx}: {str(e)}")
+                    # Use image diagonal as fallback
+                    height, width = pred_np[0].shape
+                    hausdorff = np.sqrt(height**2 + width**2)
             
-            hausdorff = calculate_hausdorff_distance(pred_np[0], mask_np[0])
             hausdorff_distances.append(hausdorff)
 
             # Save visualization
             slice_name = img_mask['case_name'][0]  # Get original slice name
-            output_path = os.path.join(output_dir, f"{slice_name}.png")
-            save_visualization(img_np[0, 0], mask_np[0], pred_np[0], output_path)
             
             # Save kfold data
             save_kfold_data(img_np[0, 0], mask_np[0], pred_np[0], slice_name, kfold_data_dir)
