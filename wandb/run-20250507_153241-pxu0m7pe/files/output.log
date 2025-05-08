@@ -1,0 +1,26 @@
+100%|█████████████████████████████████████████████████████████████████████████████████████| 43/43 [01:27<00:00,  2.03s/it]
+Epoch: 0
+  0%|                                                                                              | 0/11 [00:00<?, ?it/s]
+Iteration: 43 Train Loss: 0.6157 Dice Loss: 0.4759
+  0%|                                                                                             | 0/100 [01:28<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/cpena106/Documents/PhD_Projects/csci6370_final_project_team5/train_final_project.py", line 231, in <module>
+    validate()
+  File "/home/cpena106/Documents/PhD_Projects/csci6370_final_project_team5/train_final_project.py", line 199, in validate
+    "valid/Prediction": wandb.Image(outputs[1, ...] * 50, caption="Validation Prediction"),
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cpena106/miniconda3/envs/SwinUnetTests/lib/python3.12/site-packages/wandb/sdk/data_types/image.py", line 182, in __init__
+    self._initialize_from_data(data_or_path, mode, file_type)
+  File "/home/cpena106/miniconda3/envs/SwinUnetTests/lib/python3.12/site-packages/wandb/sdk/data_types/image.py", line 317, in _initialize_from_data
+    data = vis_util.make_grid(data, normalize=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cpena106/miniconda3/envs/SwinUnetTests/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cpena106/miniconda3/envs/SwinUnetTests/lib/python3.12/site-packages/torchvision/utils.py", line 98, in make_grid
+    norm_range(tensor, value_range)
+  File "/home/cpena106/miniconda3/envs/SwinUnetTests/lib/python3.12/site-packages/torchvision/utils.py", line 92, in norm_range
+    norm_ip(t, float(t.min()), float(t.max()))
+  File "/home/cpena106/miniconda3/envs/SwinUnetTests/lib/python3.12/site-packages/torchvision/utils.py", line 85, in norm_ip
+    img.clamp_(min=low, max=high)
+RuntimeError: result type Float can't be cast to the desired output type long int

@@ -136,11 +136,6 @@ class UNet(nn.Module):
             device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
             pretrained_dict = torch.load(model_path, map_location=device)
             self.load_state_dict(pretrained_dict)
-            
-    def load_resnet50_weights(self):
-        resnet = resnet50(pretrained=True)
-        self.encoder.load_state_dict(resnet.state_dict(), strict=False)
-        print("ResNet50 weights loaded for fine-tuning.")
 
     def load_deeplab_weights(self):
         deeplab =  deeplabv3_resnet50(weights=DeepLabV3_ResNet50_Weights.DEFAULT, pretrained=True)

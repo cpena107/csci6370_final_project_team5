@@ -1,0 +1,16 @@
+{"time":"2025-05-07T18:12:44.340022698-05:00","level":"INFO","msg":"stream: starting","core version":"0.19.3","symlink path":"/home/cpena106/Documents/PhD_Projects/csci6370_final_project_team5/wandb/run-20250507_181244-iug5632p/logs/debug-core.log"}
+{"time":"2025-05-07T18:12:44.446693687-05:00","level":"INFO","msg":"created new stream","id":"iug5632p"}
+{"time":"2025-05-07T18:12:44.446728207-05:00","level":"INFO","msg":"stream: started","id":"iug5632p"}
+{"time":"2025-05-07T18:12:44.446810157-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"iug5632p"}
+{"time":"2025-05-07T18:12:44.446820887-05:00","level":"INFO","msg":"sender: started","stream_id":"iug5632p"}
+{"time":"2025-05-07T18:12:44.446981557-05:00","level":"INFO","msg":"handler: started","stream_id":"iug5632p"}
+{"time":"2025-05-07T18:12:44.723197038-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-07T21:48:08.229355244-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-07T21:48:08.229947734-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-07T21:48:09.229850712-05:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading unet_deeplab_0/unet_deeplab_0_99.pth","runtime_seconds":1.1499374900000001,"progress":"10.0MB/118.4MB"},{"desc":"uploading unet_deeplab_0/unet_deeplab_0_final.pth","runtime_seconds":0.895880771,"progress":"7.8MB/118.4MB"},{"desc":"uploading unet_deeplab_0/unet_deeplab_0_49.pth","runtime_seconds":0.462471603,"progress":"5.7MB/118.4MB"}],"total_operations":3}}
+{"time":"2025-05-07T21:48:22.550407947-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-05-07T21:48:23.689550992-05:00","level":"INFO","msg":"stream: closing","id":"iug5632p"}
+{"time":"2025-05-07T21:48:23.689579082-05:00","level":"INFO","msg":"handler: closed","stream_id":"iug5632p"}
+{"time":"2025-05-07T21:48:23.689594402-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"iug5632p"}
+{"time":"2025-05-07T21:48:23.689653942-05:00","level":"INFO","msg":"sender: closed","stream_id":"iug5632p"}
+{"time":"2025-05-07T21:48:23.689718372-05:00","level":"INFO","msg":"stream: closed","id":"iug5632p"}

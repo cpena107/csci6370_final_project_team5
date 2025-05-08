@@ -1,0 +1,21 @@
+  9%|█████████████████▋                                                                                                                                                                            | 4/43 [00:06<01:00,  1.55s/it]
+Epoch: 0
+  0%|                                                                                                                                                                                                     | 0/100 [00:06<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/cpena106/Documents/PhD_Projects/csci6370_final_project_team5/train_final_project.py", line 235, in <module>
+    train()
+  File "/home/cpena106/Documents/PhD_Projects/csci6370_final_project_team5/train_final_project.py", line 145, in train
+    writer.add_scalar('info/total_loss', batch_loss, iter_num)
+  File "/home/cpena106/miniconda3/envs/SwinUnetTests/lib/python3.12/site-packages/tensorboardX/writer.py", line 456, in add_scalar
+    scalar(tag, scalar_value, display_name, summary_description), global_step, walltime)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cpena106/miniconda3/envs/SwinUnetTests/lib/python3.12/site-packages/tensorboardX/summary.py", line 152, in scalar
+    scalar = make_np(scalar)
+             ^^^^^^^^^^^^^^^
+  File "/home/cpena106/miniconda3/envs/SwinUnetTests/lib/python3.12/site-packages/tensorboardX/x2num.py", line 28, in make_np
+    return check_nan(prepare_pytorch(x))
+                     ^^^^^^^^^^^^^^^^^^
+  File "/home/cpena106/miniconda3/envs/SwinUnetTests/lib/python3.12/site-packages/tensorboardX/x2num.py", line 43, in prepare_pytorch
+    x = x.cpu().numpy()
+        ^^^^^^^
+KeyboardInterrupt

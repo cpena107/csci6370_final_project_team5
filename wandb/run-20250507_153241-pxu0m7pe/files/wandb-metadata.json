@@ -1,0 +1,60 @@
+{
+  "os": "Linux-6.11.0-24-generic-x86_64-with-glibc2.39",
+  "python": "CPython 3.12.4",
+  "startedAt": "2025-05-07T20:32:42.074065Z",
+  "args": [
+    "--kfold",
+    "0",
+    "--wandb_project",
+    "unet_segmentation_deeplab",
+    "--wandb_entity",
+    "andrescapc-university-of-texas-rio-grande-valley",
+    "--checkpoint",
+    "deeplab",
+    "--model_name",
+    "unet_deeplab"
+  ],
+  "program": "/home/cpena106/Documents/PhD_Projects/csci6370_final_project_team5/train_final_project.py",
+  "codePath": "train_final_project.py",
+  "git": {
+    "remote": "https://github.com/cpena107/csci6370_final_project_team5.git",
+    "commit": "9864e74696a6d0b34617773946aa0caadaaae3e5"
+  },
+  "email": "andrescapc@aol.com",
+  "root": "/home/cpena106/Documents/PhD_Projects/csci6370_final_project_team5",
+  "host": "cpena106-Precision-3660",
+  "executable": "/home/cpena106/miniconda3/envs/SwinUnetTests/bin/python",
+  "codePathLocal": "train_final_project.py",
+  "cpu_count": 8,
+  "cpu_count_logical": 16,
+  "gpu": "Tesla V100-PCIE-16GB",
+  "gpu_count": 2,
+  "disk": {
+    "/": {
+      "total": "982240026624",
+      "used": "527329669120"
+    }
+  },
+  "memory": {
+    "total": "8240955392"
+  },
+  "cpu": {
+    "count": 8,
+    "countLogical": 16
+  },
+  "gpu_nvidia": [
+    {
+      "name": "Tesla V100-PCIE-16GB",
+      "memoryTotal": "17179869184",
+      "cudaCores": 5120,
+      "architecture": "Volta"
+    },
+    {
+      "name": "NVIDIA GeForce GTX 1080",
+      "memoryTotal": "8589934592",
+      "cudaCores": 2560,
+      "architecture": "Pascal"
+    }
+  ],
+  "cudaVersion": "12.6"
+}

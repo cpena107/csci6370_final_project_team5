@@ -1,0 +1,16 @@
+{"time":"2025-05-08T01:08:05.560341489-05:00","level":"INFO","msg":"stream: starting","core version":"0.19.3","symlink path":"/home/cpena106/Documents/PhD_Projects/csci6370_final_project_team5/wandb/run-20250508_010804-0i01inpj/logs/debug-core.log"}
+{"time":"2025-05-08T01:08:05.796838399-05:00","level":"INFO","msg":"created new stream","id":"0i01inpj"}
+{"time":"2025-05-08T01:08:05.796966159-05:00","level":"INFO","msg":"handler: started","stream_id":"0i01inpj"}
+{"time":"2025-05-08T01:08:05.797031669-05:00","level":"INFO","msg":"sender: started","stream_id":"0i01inpj"}
+{"time":"2025-05-08T01:08:05.797163799-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"0i01inpj"}
+{"time":"2025-05-08T01:08:05.813267618-05:00","level":"INFO","msg":"stream: started","id":"0i01inpj"}
+{"time":"2025-05-08T01:08:06.246745736-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-08T04:40:50.889844676-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-08T04:40:50.890485377-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-08T04:40:51.88031977-05:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading unet_0/unet_0_99.pth","runtime_seconds":1.103747246,"progress":"14.8MB/118.4MB"},{"desc":"uploading unet_0/unet_0_final.pth","runtime_seconds":0.886160356,"progress":"13.7MB/118.4MB"},{"desc":"uploading unet_0/unet_0_49.pth","runtime_seconds":0.235102489,"progress":"3.4MB/118.4MB"},{"desc":"uploading history steps 594-599, summary, console lines 495-495","runtime_seconds":0.184389022}],"total_operations":4}}
+{"time":"2025-05-08T04:41:04.704695552-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-05-08T04:41:05.847896739-05:00","level":"INFO","msg":"stream: closing","id":"0i01inpj"}
+{"time":"2025-05-08T04:41:05.847929579-05:00","level":"INFO","msg":"handler: closed","stream_id":"0i01inpj"}
+{"time":"2025-05-08T04:41:05.847945059-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"0i01inpj"}
+{"time":"2025-05-08T04:41:05.847972219-05:00","level":"INFO","msg":"sender: closed","stream_id":"0i01inpj"}
+{"time":"2025-05-08T04:41:05.848067689-05:00","level":"INFO","msg":"stream: closed","id":"0i01inpj"}
