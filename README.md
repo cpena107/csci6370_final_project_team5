@@ -1,6 +1,7 @@
 # CSCI 6370 COVID CT Scans Segmentation Project
 
-# Group 5: Carlos Pena-Caballero, Christian Narcia-Macias, Tyler Morgan, Jorge Orta
+## Group 5: Carlos Pena-Caballero, Christian Narcia-Macias, Tyler Morgan, Jorge Orta
+## Professor: Dr. Haoteng Tang
 
 ## Overview
 This project implements medical image segmentation using deep learning models. It includes implementations of UNet and TransUNet architectures for semantic segmentation tasks.
